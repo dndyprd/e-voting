@@ -6,8 +6,9 @@ import Squares from '@/components/Squares';
 import RotatingText from '@/components/RotatingText';
 
 export default function Welcome() {
-    const { props } = usePage<{ name: string; auth: Auth }>();
-    const appName = props.name || 'ORGANIZATION NAME';
+    const { props } = usePage<{ name: string; organization_name: string; auth: Auth }>();
+    const appName = props.name || 'APP NAME';
+    const organization = props.organization_name || 'ORGANIZATION';
 
     return (
         <>
@@ -31,7 +32,7 @@ export default function Welcome() {
                     <div className="flex flex-col items-center md:items-start justify-center max-w-2xl text-white">
                         {/* HEADER TITLE */}
                         <div className="mb-4 flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/10 shadow-lg">
-                            <h2 className="text-sm md:text-base font-medium tracking-wide">{appName}</h2>
+                            <h2 className="text-sm md:text-base font-medium tracking-wide">{appName} | {organization}</h2>
                         </div>
 
                         <h1 className="flex flex-col gap-2 md:flex-row flex-wrap items-center justify-center md:justify-start text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight tracking-tight">

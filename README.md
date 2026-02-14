@@ -42,14 +42,16 @@ Salin file `.env.example` menjadi `.env`:
 ```bash
 cp .env.example .env
 ```
-Lalu atur koneksi database Anda di dalam file `.env`:
+Lalu atur koneksi database dan nama organisasi Anda di dalam file `.env`:
 ```env
+APP_NAME="Nama Aplikasi"
+ORGANIZATION="Nama Organisasi"
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=e_voting
+DB_DATABASE=e-voting
 DB_USERNAME=root
-DB_PASSWORD=
+DB_PASSWORD=password
 ```
 
 ### 6. Generate App Key
