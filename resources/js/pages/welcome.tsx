@@ -56,12 +56,12 @@ export default function Welcome() {
                         </p>
 
                         <div className="mt-8 md:mt-12 flex flex-wrap items-center justify-center md:justify-start gap-4 text-base md:text-lg">
-                            <button className="btn-home bg-white text-blue-800 shadow-lg hover:bg-blue-50 flex items-center gap-2">
+                            <a href="/voting" className="btn-home bg-white text-blue-800 shadow-lg hover:bg-blue-50 flex items-center gap-2">
                                 <i className="fa-solid fa-inbox"></i> Voting Sekarang
-                            </button>
-                            <button className="btn-home bg-white/5 backdrop-blur-sm border border-white/20 text-white hover:bg-white/10">
+                            </a>
+                            <a href="/login" className="btn-home bg-white/5 backdrop-blur-sm border border-white/20 text-white hover:bg-white/10">
                                 Login
-                            </button>
+                            </a>
                         </div>
                     </div>
 
