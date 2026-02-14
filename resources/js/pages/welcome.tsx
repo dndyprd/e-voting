@@ -51,7 +51,7 @@ export default function Welcome() {
                             />
                         </h1>
                         <p className="mt-4 md:mt-6 text-blue-100/70 text-base md:text-lg max-w-xl text-center md:text-left leading-relaxed">
-                            Silahkan berikan suara terbaik Anda untuk kandidat pilihan Anda yaa.
+                            Berikan suara terbaik Anda untuk kandidat pilihan Anda.
                             Jangan lupa pilih dengan sepenuh hati agar tidak menyesalinya nanti.
                         </p>
 
@@ -66,7 +66,7 @@ export default function Welcome() {
                     </div>
 
                     {/* RIGHT: ILLUSTRATION SECTION */}
-                    <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+                    <div className="mb-8 md:mb-0 relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
                         <div className="relative group">
                             {/* Main Animation Container */}
                             <div className="relative bg-white/5 backdrop-blur-3xl rounded-xl md:rounded-2xl p-6 md:p-12 border border-white/10 shadow-3xl ring-1 ring-white/20 transform hover:scale-101 transition-all duration-700">
