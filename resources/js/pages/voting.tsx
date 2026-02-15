@@ -33,12 +33,6 @@ export default function Voting() {
             image: '/img/kandidat/kandidat3.png',
             description: 'Candidate 3 Description',
         },
-        {
-            id: 4,
-            name: 'Candidate 4',
-            image: '/img/kandidat/kandidat3.png',
-            description: 'Candidate 4 Description',
-        },
     ];
 
     return (
@@ -57,7 +51,7 @@ export default function Voting() {
                             className="rounded-full w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
                         />
                         <div className="flex flex-col md:gap-2">
-                            <h3 className="text-lg md:text-4xl font-semibold tracking-tight">Vote Your <span className="text-blue-800">Best Candidate</span> !</h3>
+                            <h3 className="text-lg md:text-4xl font-semibold tracking-tight">Vote <span className="text-blue-800">Kandidat Terbaikmu</span> !</h3>
                             <p className="text-sm md:text-lg">Geser kartu untuk melihat kandidat lainnya.
                                 Klik kartu untuk melihat detail kandidat.</p>
                         </div>
