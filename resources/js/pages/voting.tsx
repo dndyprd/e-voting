@@ -30,7 +30,7 @@ export default function Voting() {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
             </Head>
             <Layout>
-                <div className="flex flex-col gap-4 w-full max-w-6xl">
+                <div className="center flex-col gap-4 w-full max-w-6xl py-12">
                     {/* Header */}
                     <div className="bg-white text-blue-950 px-14 py-6 w-full rounded-2xl center flex-col">
                         <h3 className="text-4xl font-semibold tracking-tight">Vote Your <span className="text-blue-800">Best Candidate</span></h3>
@@ -38,7 +38,7 @@ export default function Voting() {
                     </div>
 
                     {/* Card Candidate */}
-                    <div className="bg-white text-blue-950 px-14 py-8 w-full rounded-2xl center gap-2">
+                    <div className="bg-white text-blue-950 px-14 py-8 w-full rounded-2xl center gap-8">
                         {candidate.map((item) => (
                             <TiltedCard>
                                 <div key={item.id} className="cursor-pointer bg-white text-blue-950 w-full rounded-2xl center flex-col gap-2 rounded-md overflow-hidden">
