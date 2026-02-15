@@ -1,17 +1,14 @@
-import { Head, usePage, router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { Player } from '@lottiefiles/react-lottie-player';
-import { Auth } from '@/types';
 import { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import Layout from '@/components/layout';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 export default function Grafik() {
-    const { auth } = usePage<{ auth: Auth }>().props;
-    const [refreshKey, setRefreshKey] = useState(0);
 
     // Auto refresh every 1 minute
     useEffect(() => {
@@ -24,7 +21,6 @@ export default function Grafik() {
 
     const handleRefresh = () => {
         router.reload({ only: ['candidate'] });
-        setRefreshKey(prev => prev + 1);
     };
 
     const labels = ['Candidate 1', 'Candidate 2', 'Candidate 3'];
@@ -75,8 +71,8 @@ export default function Grafik() {
                     weight: 'bold' as const,
                     size: 14
                 },
-                formatter: (value: number, ctx: any) => {
-                    const total = ctx.chart.data.datasets[0].data.reduce((acc: number, val: number) => acc + val, 0);
+                formatter: (value: number, ctx: Context) => {
+                    const total = (ctx.chart.data.datasets[0].data as number[]).reduce((acc, val) => acc + val, 0);
                     const percentage = ((value / total) * 100).toFixed(1) + '%';
                     return percentage;
                 },

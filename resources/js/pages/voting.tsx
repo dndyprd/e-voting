@@ -1,6 +1,5 @@
-import { Head, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { Player } from '@lottiefiles/react-lottie-player';
-import { Auth } from '@/types';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import Layout from '@/components/layout';
@@ -12,7 +11,6 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 export default function Voting() {
-    const { auth } = usePage<{ auth: Auth }>().props;
 
     const candidate = [
         {

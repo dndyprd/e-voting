@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { router, usePage } from '@inertiajs/react';
+import { usePage } from '@inertiajs/react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function Navbar() {
