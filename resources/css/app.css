@@ -233,7 +233,11 @@
 }
 
 @layer components {
+    .center{
+        @apply flex items-center justify-center;
+    }
+
     .btn-home {
-        @apply cursor-pointer px-6 py-3 font-semibold rounded-xl hover:scale-105 transition-all duration-300;
+        @apply cursor-pointer px-6 py-3 rounded-xl hover:scale-101 transition-all duration-300;
     }
 }

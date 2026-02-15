@@ -1,4 +1,5 @@
 import { Head } from '@inertiajs/react';
+import Layout from '@/components/layout';
 
 export default function Voting() {
     return (
@@ -6,9 +7,11 @@ export default function Voting() {
             <Head title="Voting">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
             </Head>
-            <div>
-                <h1>Voting</h1>
-            </div>
+            <Layout>
+                <div>
+                    <h1>Voting</h1>
+                </div>
+            </Layout>
         </>
     );
 }
