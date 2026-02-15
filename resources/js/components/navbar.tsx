@@ -31,7 +31,7 @@ export default function Navbar() {
     return (
         <>
             {/* NAVBAR : DESKTOP */}
-            <div className="fixed top-8 right-8 z-50 hidden md:block font-['Poppins']">
+            <div className="fixed top-8 right-8 z-30 hidden md:block font-['Poppins']">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                     className="cursor-pointer flex items-center gap-3 px-6 py-2 bg-white text-blue-900 font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border border-white/20"
@@ -67,7 +67,7 @@ export default function Navbar() {
             </div>
 
             {/* NAVBAR : MOBILE */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-safe">
+            <div className="md:hidden fixed bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-safe">
                 <div className="grid grid-cols-4 w-full px-2">
                     {listNavbar.map((item) => {
                         const isActive = url === item.href;

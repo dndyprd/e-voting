@@ -1,19 +1,41 @@
+import { useState } from 'react';
 import { Head, usePage } from '@inertiajs/react';
 import { Auth } from '@/types';
 import { Player } from '@lottiefiles/react-lottie-player';
 import Layout from '@/components/layout';
 import RotatingText from '@/components/RotatingText';
+import Register from '@/components/auth/register';
+import Login from '@/components/auth/login';
 
 export default function Welcome() {
     const { props } = usePage<{ name: string; organization_name: string; auth: Auth }>();
     const appName = props.name || 'APP NAME';
     const organization = props.organization_name || 'ORGANIZATION';
 
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
+
     return (
         <>
             <Head title="Home">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
             </Head>
+            <Register
+                isOpen={isRegisterOpen}
+                onClose={() => setIsRegisterOpen(false)}
+                onLoginClick={() => {
+                    setIsRegisterOpen(false);
+                    setIsLoginOpen(true);
+                }}
+            />
+            <Login
+                isOpen={isLoginOpen}
+                onClose={() => setIsLoginOpen(false)}
+                onRegisterClick={() => {
+                    setIsLoginOpen(false);
+                    setIsRegisterOpen(true);
+                }}
+            />
             <Layout>
                 {/* LEFT: TEXT SECTION */}
                 <div className="flex flex-col items-center md:items-start justify-center max-w-2xl text-white">
@@ -45,9 +67,12 @@ export default function Welcome() {
                         <a href="/voting" className="btn-home bg-white text-blue-800 shadow-lg hover:bg-blue-50 flex items-center gap-2">
                             <i className="fa-solid fa-inbox"></i> Voting Sekarang
                         </a>
-                        <a href="/login" className="btn-home bg-white/5 backdrop-blur-sm border border-white/20 text-white hover:bg-white/10">
+                        <button
+                            onClick={() => setIsLoginOpen(true)}
+                            className="cursor-pointer btn-home bg-white/5 backdrop-blur-sm border border-white/20 text-white hover:bg-white/10"
+                        >
                             Login
-                        </a>
+                        </button>
                     </div>
                 </div>
 
