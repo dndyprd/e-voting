@@ -19,7 +19,7 @@ export default function Profile() {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
             </Head>
             <Layout>
-                <div className="bg-white text-blue-950 px-14 py-12 w-full max-w-5xl rounded-2xl flex flex-col md:flex-row items-center justify-center p-6 gap-6 md:gap-12 z-10">
+                <div className="bg-white text-blue-950 px-14 py-12 w-full max-w-5xl rounded-2xl center flex-col md:flex-row gap-6 md:gap-12">
                     <Player
                         autoplay
                         loop

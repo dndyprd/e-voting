@@ -53,9 +53,9 @@ export default function Navbar() {
                                 <a
                                     key={item.name}
                                     href={item.href}
-                                    className="flex items-center gap-4 px-5 py-2 text-gray-600 hover:bg-blue-50 hover:text-blue-700 rounded-2xl transition-all duration-300 font-medium group"
+                                    className="flex items-center gap-4 px-5 py-2 text-blue-950 hover:bg-blue-50 hover:text-blue-700 rounded-2xl transition-all duration-300 font-medium group"
                                 >
-                                    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-50 group-hover:bg-blue-100 transition-colors">
+                                    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors">
                                         <i className={`${item.icon} text-sm`}></i>
                                     </div>
                                     <span>{item.name}</span>
