@@ -1,6 +1,6 @@
 import { Head, router } from '@inertiajs/react';
 import { Player } from '@lottiefiles/react-lottie-player';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import Layout from '@/components/layout';
