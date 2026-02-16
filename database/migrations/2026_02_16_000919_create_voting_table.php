@@ -40,7 +40,7 @@ return new class extends Migration
 
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('voter_id')->references('id')->on('voters')->onDelete('cascade');
+            $table->foreignId('voter_id')->unique()->references('id')->on('voters')->onDelete('cascade');
             $table->foreignId('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->timestamps();
         });
