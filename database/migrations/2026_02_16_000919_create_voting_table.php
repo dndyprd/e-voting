@@ -52,6 +52,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('votes');
         Schema::dropIfExists('candidates');
         Schema::dropIfExists('voters');
         Schema::dropIfExists('divisi');
