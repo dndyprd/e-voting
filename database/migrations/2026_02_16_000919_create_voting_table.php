@@ -21,8 +21,7 @@ return new class extends Migration
         Schema::create('voters', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nim')->unique(); 
-            $table->string('auth_code');
+            $table->string('auth_code')->unique();
             $table->foreignId('divisi_id')->references('id')->on('divisi')->onDelete('cascade');
             $table->boolean('is_voted')->default(false);
             $table->timestamps();
