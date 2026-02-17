@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 class Voter extends Model
 {
@@ -26,6 +27,33 @@ class Voter extends Model
         return [
             'is_voted' => 'boolean',
         ];
+    }
+
+    // Auto Generate
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($voter) {
+            if (empty($voter->auth_code)) {
+                $voter->auth_code = static::generateAuthCode();
+            }
+        });
+    }
+
+    // Generate unique auth code
+    public static function generateAuthCode(): string
+    {
+        do {
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            $code = '';
+            
+            for ($i = 0; $i < 7; $i++) {
+                $code .= $characters[rand(0, strlen($characters) - 1)];
+            }
+        } while (static::where('auth_code', $code)->exists());
+
+        return $code;
     }
 
     public function divisi(): BelongsTo

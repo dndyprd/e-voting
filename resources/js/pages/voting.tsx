@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Head } from '@inertiajs/react';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import Layout from '@/components/layout';
 import TiltedCard from '@/components/TiltedCard';
+import Vote from '@/components/auth/vote';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -11,33 +13,69 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 export default function Voting() {
-
     const candidate = [
         {
-            id: 1,
             name: 'Candidate 1',
+            order: 1,
             image: '/img/kandidat/kandidat.png',
-            description: 'Candidate 1 Description',
+            visi: ['Menjadikan organisasi sebagai wadah aspirasi yang inovatif, transparan, dan inklusif bagi seluruh anggota.'],
+            misi: [
+                'Meningkatkan kolaborasi antar divisi melalui program kerja yang terintegrasi.',
+                'Menyelenggarakan forum diskusi rutin untuk mendengar dan merealisasikan aspirasi anggota.',
+                'Meningkatkan standar kualitas setiap kegiatan yang diselenggarakan organisasi.',
+                'Mengoptimalkan penggunaan teknologi digital dalam manajemen administrasi organisasi.',
+                'Membangun karakter kepemimpinan yang berintegritas dan profesional.',
+                'Meningkatkan standar kualitas setiap kegiatan yang diselenggarakan organisasi.',
+            ],
+            divisi: 'Kelas 3A',
         },
         {
-            id: 2,
             name: 'Candidate 2',
+            order: 2,
             image: '/img/kandidat/kandidat2.png',
-            description: 'Candidate 2 Description',
+            visi: ['Membangun ekosistem organisasi yang kreatif, mandiri, dan berdampak positif bagi lingkungan sekitar.'],
+            misi: [
+                'Mendorong pengembangan minat dan bakat anggota melalui pelatihan intensif.',
+                'Memperluas jaringan kerja sama dengan pihak eksternal untuk peluang kolaborasi.',
+                'Mewujudkan budaya kerja yang disiplin namun tetap mengedepankan kekeluargaan.',
+                'Menciptakan inovasi program kerja yang berbasis solusi atas masalah yang ada.'
+            ],
+            divisi: 'Kelas 3B',
         },
         {
-            id: 3,
             name: 'Candidate 3',
+            order: 3,
             image: '/img/kandidat/kandidat3.png',
-            description: 'Candidate 3 Description',
+            visi: ['Menciptakan organisasi yang solid, adaptif terhadap perubahan, dan unggul dalam pencapaian prestasi.'],
+            misi: [
+                'Memperkuat koordinasi internal melalui sistem komunikasi yang lebih efisien.',
+                'Meningkatkan standar kualitas setiap kegiatan yang diselenggarakan organisasi.',
+                'Memfasilitasi ide-ide kreatif anggota untuk menjadi program kerja yang nyata.',
+                'Mengadakan program mentoring untuk pemantapan kompetensi anggota.',
+                'Meningkatkan standar kualitas setiap kegiatan yang diselenggarakan organisasi.'
+            ],
+            divisi: 'Kelas 3C',
         },
     ];
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedCandidate, setSelectedCandidate] = useState<any>(null);
+
+    const handleVoteClick = (item: any) => {
+        setSelectedCandidate(item);
+        setIsModalOpen(true);
+    };
 
     return (
         <>
             <Head title="Voting">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
             </Head>
+            <Vote
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                candidate={selectedCandidate}
+            />
             <Layout>
                 <div className="center flex-col gap-4 w-full max-w-6xl py-12">
                     {/* Header */}
@@ -56,7 +94,7 @@ export default function Voting() {
                     </div>
 
                     {/* Card Candidate */}
-                    <div className="relative w-full px-4 md:px-0">
+                    <div className="relative w-full">
                         <div className="bg-white px-4 py-6 md:px-10 md:py-8 w-full rounded-3xl relative group">
                             <Swiper
                                 modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -83,10 +121,10 @@ export default function Voting() {
                                 }}
                                 className="!px-4"
                             >
-                                {candidate.map((item) => (
-                                    <SwiperSlide key={item.id} className="pt-4 pb-8">
+                                {candidate.map((item, index) => (
+                                    <SwiperSlide key={index} className="pt-4 pb-8">
                                         <TiltedCard>
-                                            <div className="cursor-pointer bg-white text-blue-950 w-full rounded-2xl flex flex-col gap-2 overflow-hidden shadow-lg transition-all duration-500 border border-blue-50/50">
+                                            <div onClick={() => handleVoteClick(item)} className="cursor-pointer bg-white text-blue-950 w-full rounded-2xl flex flex-col gap-2 overflow-hidden shadow-lg transition-all duration-500 border border-blue-50/50">
                                                 <img
                                                     src={`/storage/${item.image}`}
                                                     alt={item.name}

@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
 
                 {/* CONTENT */}
-                <div className="relative z-10 w-full min-h-screen flex flex-col md:flex-row items-center justify-center p-6 gap-12 md:gap-24">
+                <div className="relative z-10 w-full min-h-screen flex flex-col md:flex-row items-center justify-start md:justify-center px-6 md:p-24 gap-12 md:gap-24 md:pt-6">
                     {children}
                 </div>
             </main>

@@ -1,6 +1,6 @@
 import { Head, router } from '@inertiajs/react';
 import { Player } from '@lottiefiles/react-lottie-player';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import Layout from '@/components/layout';
@@ -9,6 +9,18 @@ import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 export default function Grafik() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Auto refresh every 1 minute
     useEffect(() => {
@@ -56,7 +68,7 @@ export default function Grafik() {
         cutout: '65%', // Thinner ring
         plugins: {
             legend: {
-                position: 'right' as const,
+                position: isMobile ? 'bottom' as const : 'right' as const,
                 labels: {
                     usePointStyle: true,
                     padding: 20,
@@ -66,6 +78,7 @@ export default function Grafik() {
                 }
             },
             datalabels: {
+                display: !isMobile,
                 color: '#fff',
                 font: {
                     weight: 'bold' as const,
@@ -98,10 +111,10 @@ export default function Grafik() {
                         <Player
                             autoplay
                             loop
-                            src="https://assets8.lottiefiles.com/packages/lf20_yMpiqXia1k.json"
-                            className="rounded-full w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
+                            src="https://lottie.host/19d8ecb3-9cc5-4ee2-bd17-8631d22bc0d9/YT6el0Kop0.json"
+                            className="w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
                         />
-                        <div className="flex flex-col md:gap-2">
+                        <div className="flex flex-col py-4 md:p-0 md:gap-2">
                             <h3 className="text-lg md:text-4xl font-semibold tracking-tight">Lihat Perolehan Suara <span className="text-blue-800">Kandidat Favoritmu</span> !</h3>
                             <p className="text-sm md:text-lg">Pantau terus perolehan suara kandidat favoritmu dan berikan dukungan juga yaa!</p>
                         </div>
@@ -109,8 +122,8 @@ export default function Grafik() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
                         {/* Chart */}
-                        <div className="md:col-span-2 bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center justify-center min-h-[400px]">
-                            <div className="w-full h-[300px] md:h-[400px] relative">
+                        <div className="md:col-span-2 bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center justify-center min-h-[200px] md:min-h-[400px]">
+                            <div className="w-full h-[200px] md:h-[400px] relative">
                                 <Doughnut data={data} options={options} />
                             </div>
                         </div>
