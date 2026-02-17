@@ -11,10 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('app_settings', function (Blueprint $table) {
+            $table->id(); 
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
+            $table->timestamps();
+        });
+
         Schema::create('divisi', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
+            $table->timestamps();
         });
 
         Schema::create('voters', function (Blueprint $table) {
@@ -24,6 +32,7 @@ return new class extends Migration
             $table->string('auth_code')->unique();
             $table->foreignId('divisi_id')->references('id')->on('divisi')->onDelete('cascade');
             $table->boolean('is_voted')->default(false);
+            $table->timestamps();
         });
 
         Schema::create('candidates', function (Blueprint $table) {
@@ -34,6 +43,7 @@ return new class extends Migration
             $table->text('vision');
             $table->text('mission');
             $table->foreignId('divisi_id')->references('id')->on('divisi')->onDelete('cascade');
+            $table->timestamps();
         });
 
         Schema::create('votes', function (Blueprint $table) {
@@ -41,6 +51,7 @@ return new class extends Migration
             $table->foreignId('voter_id')->unique()->references('id')->on('voters')->onDelete('cascade');
             $table->foreignId('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
             $table->timestamp('voted_at')->nullable();
+            $table->timestamps();
         });
     }
 

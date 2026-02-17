@@ -95,7 +95,7 @@ export default function Voting() {
 
                     {/* Card Candidate */}
                     <div className="relative w-full">
-                        <div className="bg-white px-4 py-6 md:px-10 md:py-8 w-full rounded-3xl relative group">
+                        <div className="bg-white px-4 py-6 md:px-10 md:py-4 w-full rounded-3xl relative group">
                             <Swiper
                                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                                 spaceBetween={20}
