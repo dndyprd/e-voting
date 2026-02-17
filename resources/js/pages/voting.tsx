@@ -77,7 +77,7 @@ export default function Voting() {
                 candidate={selectedCandidate}
             />
             <Layout>
-                <div className="center flex-col gap-4 w-full max-w-6xl py-12">
+                <div className="center flex-col gap-4 w-full max-w-6xl md:pt-12">
                     {/* Header */}
                     <div className="center bg-white text-blue-950 px-4 py-2 md:px-10 gap-2 md:gap-4 w-full rounded-2xl">
                         <Player
@@ -128,7 +128,7 @@ export default function Voting() {
                                                 <img
                                                     src={`/storage/${item.image}`}
                                                     alt={item.name}
-                                                    className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
+                                                    className="w-full aspect-[3/4] object-cover hover:scale-102 transition-transform duration-700"
                                                 />
                                             </div>
                                         </TiltedCard>
