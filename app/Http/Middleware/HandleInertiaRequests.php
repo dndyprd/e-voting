@@ -40,7 +40,9 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'organization_name' => env('ORGANIZATION'),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user('web') 
+                    ? $request->user('web')
+                    : ($request->user('voter') ? $request->user('voter')->load('divisi') : null),
             ],
         ];
     }

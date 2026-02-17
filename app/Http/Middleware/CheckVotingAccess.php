@@ -11,15 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckVotingAccess
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next)
     {
-        // Check if user is logged in
-        if (!Auth::check()) {
+        // Check if user is logged in (either web or voter guard)
+        if (!Auth::guard('web')->check() && !Auth::guard('voter')->check()) {
             return redirect()->route('profile');
         }
 

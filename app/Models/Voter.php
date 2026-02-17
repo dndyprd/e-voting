@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
-class Voter extends Model
+class Voter extends Authenticatable
 {
     protected $table = 'voters';
 
@@ -27,6 +27,12 @@ class Voter extends Model
         return [
             'is_voted' => 'boolean',
         ];
+    }
+
+    // Disable password requirement for voter authentication
+    public function getAuthPassword()
+    {
+        return null;
     }
 
     // Auto Generate

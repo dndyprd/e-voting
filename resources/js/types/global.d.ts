@@ -12,6 +12,8 @@ declare module '@inertiajs/core' {
 }
 
 declare global {
+    function route(name: string, params?: any): string;
+
     namespace JSX {
         interface IntrinsicElements {
             'lottie-player': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {

@@ -9,6 +9,8 @@ import Login from '@/components/auth/login';
 
 export default function Welcome() {
     const { props } = usePage<{ name: string; organization_name: string; auth: Auth }>();
+    const { auth } = props;
+
     const appName = props.name || 'APP NAME';
     const organization = props.organization_name || 'ORGANIZATION';
 
@@ -68,12 +70,14 @@ export default function Welcome() {
                             <a href="/voting" className="btn-home bg-white text-blue-800 shadow-lg hover:bg-blue-50 flex items-center gap-2">
                                 <i className="fa-solid fa-inbox"></i> Voting Sekarang
                             </a>
-                            <button
-                                onClick={() => setIsLoginOpen(true)}
-                                className="cursor-pointer btn-home bg-white/5 backdrop-blur-sm border border-white/20 text-white hover:bg-white/10"
-                            >
-                                Login
-                            </button>
+                            {!auth.user &&
+                                <button
+                                    onClick={() => setIsLoginOpen(true)}
+                                    className="cursor-pointer btn-home bg-white/5 backdrop-blur-sm border border-white/20 text-white hover:bg-white/10"
+                                >
+                                    Login
+                                </button>
+                            }
                         </div>
                     </div>
 

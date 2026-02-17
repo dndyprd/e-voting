@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, router, usePage } from '@inertiajs/react';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { Auth } from '@/types';
 import Layout from '@/components/layout';
@@ -13,17 +13,23 @@ export default function Profile() {
     const description = !auth.user
         ? "Selamat datang di halaman profil. Login terlebih dahulu untuk melakukan voting"
         : auth.user.is_voted
-            ? "Selamat datang di halaman profile. Terima kasih sudah melakukan voting"
-            : "Selamat datang di halaman profile. Voting kandidat jagoanmu";
+            ? "Terima kasih sudah melakukan voting! Kontribusi Anda sangat berarti."
+            : "Silakan pilih kandidat favoritmu dan lakukan voting!";
 
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+    const handleLogout = () => {
+        router.post('/logout');
+    };
 
     return (
         <>
             <Head title="Profile">
                 <link rel="preconnect" href="https://fonts.bunny.net" />
             </Head>
+
+            {/* AUTH MODAL */}
             <Register
                 isOpen={isRegisterOpen}
                 onClose={() => setIsRegisterOpen(false)}
@@ -42,7 +48,7 @@ export default function Profile() {
             />
             <Layout>
                 <div className="py-8 md:p-0">
-                    <div className="bg-white text-blue-950 px-10 md:px-14 py-8 md:py-12 w-full max-w-5xl rounded-2xl center flex-col md:flex-row gap-6 md:gap-12">
+                    <div className="bg-white text-blue-950 px-10 md:px-14 py-6 md:py-8 w-full max-w-6xl rounded-2xl center flex-col md:flex-row gap-6 md:gap-12">
                         <Player
                             autoplay
                             loop
@@ -50,17 +56,29 @@ export default function Profile() {
                             className="rounded-full w-full"
                             style={{ width: '200px', height: '200px' }}
                         />
-                        <div className="flex flex-col gap-4">
-                            <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
-                                Hi, <span className="text-blue-800">{auth.user?.name || 'Guest'}</span>!
-                            </h1>
-                            <p className="text-sm md:text-lg max-w-md leading-relaxed">
+                        <div className="flex flex-col gap-2">
+                            <h3 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                                Hi, <span className="text-blue-800">{auth.user?.name || 'Guest'}</span> !
+                            </h3>
+                            {auth.user?.divisi && (
+                                <h5 className="text-sm md:text-lg font-semibold text-gray-600">{auth.user.divisi.code} {auth.user.divisi.name}</h5>
+                            )}
+                            <p className="text-sm md:text-lg">
                                 {description}
                             </p>
-                            <button onClick={() => setIsLoginOpen(true)}
-                                className="mt-4 center btn-home bg-blue-800 text-white shadow-lg hover:bg-blue-900 gap-2">
-                                <i className="fa-solid fa-right-to-bracket"></i> Login
-                            </button>
+
+                            {/* BUTTON */}
+                            {auth.user ? (
+                                <button onClick={handleLogout}
+                                    className="mt-4 center btn-home bg-red-600 text-white shadow-lg hover:bg-red-700 gap-2 font-semibold">
+                                    <i className="fa-solid fa-right-from-bracket"></i> Logout
+                                </button>
+                            ) : (
+                                <button onClick={() => setIsLoginOpen(true)}
+                                    className="mt-4 center btn-home bg-blue-800 text-white shadow-lg hover:bg-blue-900 gap-2">
+                                    <i className="fa-solid fa-right-to-bracket"></i> Login
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
