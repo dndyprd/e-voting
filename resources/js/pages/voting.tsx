@@ -68,7 +68,7 @@ export default function Voting() {
     ];
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
+    const [selectedCandidate, setSelectedCandidate] = useState<Candidate | undefined>(undefined);
 
     const handleVoteClick = (item: Candidate) => {
         setSelectedCandidate(item);
