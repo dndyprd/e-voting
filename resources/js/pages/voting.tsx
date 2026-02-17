@@ -12,6 +12,15 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
+interface Candidate {
+    name: string;
+    order: number;
+    image: string;
+    visi: string[];
+    misi: string[];
+    divisi: string;
+}
+
 export default function Voting() {
     const candidate = [
         {
@@ -59,9 +68,9 @@ export default function Voting() {
     ];
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedCandidate, setSelectedCandidate] = useState<any>(null);
+    const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
 
-    const handleVoteClick = (item: any) => {
+    const handleVoteClick = (item: Candidate) => {
         setSelectedCandidate(item);
         setIsModalOpen(true);
     };

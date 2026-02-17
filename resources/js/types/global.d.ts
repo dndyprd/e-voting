@@ -12,7 +12,7 @@ declare module '@inertiajs/core' {
 }
 
 declare global {
-    function route(name: string, params?: any): string;
+    function route(name: string, params?: Record<string, unknown>): string;
 
     namespace JSX {
         interface IntrinsicElements {
