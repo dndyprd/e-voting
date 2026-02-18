@@ -14,9 +14,13 @@ class Candidate extends Model
         'name',
         'order',
         'image',
-        'vision',
-        'mission',
+        'visi',
+        'misi',
         'divisi_id',
+    ];
+
+    protected $casts = [
+        'misi' => 'array',
     ];
 
     public function divisi(): BelongsTo

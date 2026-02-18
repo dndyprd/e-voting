@@ -29,7 +29,8 @@ class CandidatesTable
                     ->label('Nama Kandidat')
                     ->searchable(),
                 TextColumn::make('divisi.name')
-                    ->label('Divisi'),
+                    ->label('Divisi')
+                    ->badge(),
             ])
             ->filters([
                 //

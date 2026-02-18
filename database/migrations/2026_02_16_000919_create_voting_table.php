@@ -41,8 +41,8 @@ return new class extends Migration
             $table->string('name');
             $table->integer('order');
             $table->string('image');
-            $table->text('vision');
-            $table->text('mission');
+            $table->text('visi');
+            $table->json('misi');
             $table->foreignId('divisi_id')->references('id')->on('divisi')->onDelete('cascade');
             $table->timestamps();
         });

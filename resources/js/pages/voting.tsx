@@ -16,57 +16,14 @@ interface Candidate {
     name: string;
     order: number;
     image: string;
-    visi: string[];
+    visi: string;
     misi: string[];
-    divisi: string;
+    divisi: {
+        name: string;
+    } | string;
 }
 
-export default function Voting() {
-    const candidate = [
-        {
-            name: 'Candidate 1',
-            order: 1,
-            image: '/img/kandidat/kandidat.png',
-            visi: ['Menjadikan organisasi sebagai wadah aspirasi yang inovatif, transparan, dan inklusif bagi seluruh anggota.'],
-            misi: [
-                'Meningkatkan kolaborasi antar divisi melalui program kerja yang terintegrasi.',
-                'Menyelenggarakan forum diskusi rutin untuk mendengar dan merealisasikan aspirasi anggota.',
-                'Meningkatkan standar kualitas setiap kegiatan yang diselenggarakan organisasi.',
-                'Mengoptimalkan penggunaan teknologi digital dalam manajemen administrasi organisasi.',
-                'Membangun karakter kepemimpinan yang berintegritas dan profesional.',
-                'Meningkatkan standar kualitas setiap kegiatan yang diselenggarakan organisasi.',
-            ],
-            divisi: 'Kelas 3A',
-        },
-        {
-            name: 'Candidate 2',
-            order: 2,
-            image: '/img/kandidat/kandidat2.png',
-            visi: ['Membangun ekosistem organisasi yang kreatif, mandiri, dan berdampak positif bagi lingkungan sekitar.'],
-            misi: [
-                'Mendorong pengembangan minat dan bakat anggota melalui pelatihan intensif.',
-                'Memperluas jaringan kerja sama dengan pihak eksternal untuk peluang kolaborasi.',
-                'Mewujudkan budaya kerja yang disiplin namun tetap mengedepankan kekeluargaan.',
-                'Menciptakan inovasi program kerja yang berbasis solusi atas masalah yang ada.'
-            ],
-            divisi: 'Kelas 3B',
-        },
-        {
-            name: 'Candidate 3',
-            order: 3,
-            image: '/img/kandidat/kandidat3.png',
-            visi: ['Menciptakan organisasi yang solid, adaptif terhadap perubahan, dan unggul dalam pencapaian prestasi.'],
-            misi: [
-                'Memperkuat koordinasi internal melalui sistem komunikasi yang lebih efisien.',
-                'Meningkatkan standar kualitas setiap kegiatan yang diselenggarakan organisasi.',
-                'Memfasilitasi ide-ide kreatif anggota untuk menjadi program kerja yang nyata.',
-                'Mengadakan program mentoring untuk pemantapan kompetensi anggota.',
-                'Meningkatkan standar kualitas setiap kegiatan yang diselenggarakan organisasi.'
-            ],
-            divisi: 'Kelas 3C',
-        },
-    ];
-
+export default function Voting({ candidates }: { candidates: Candidate[] }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCandidate, setSelectedCandidate] = useState<Candidate | undefined>(undefined);
 
@@ -116,7 +73,7 @@ export default function Voting() {
                                         spaceBetween: 20,
                                     },
                                     1024: {
-                                        slidesPerView: candidate.length < 3 ? 2 : 3,
+                                        slidesPerView: candidates.length < 3 ? 2 : 3,
                                         spaceBetween: 30,
                                     },
                                 }}
@@ -130,7 +87,7 @@ export default function Voting() {
                                 }}
                                 className="!px-4"
                             >
-                                {candidate.map((item, index) => (
+                                {candidates.map((item, index) => (
                                     <SwiperSlide key={index} className="pt-4 pb-8">
                                         <TiltedCard>
                                             <div onClick={() => handleVoteClick(item)} className="cursor-pointer bg-white text-blue-950 w-full rounded-2xl flex flex-col gap-2 overflow-hidden shadow-lg transition-all duration-500 border border-blue-50/50">

@@ -4,9 +4,11 @@ interface Candidate {
     name: string;
     order: number;
     image: string;
-    visi: string[];
+    visi: string;
     misi: string[];
-    divisi: string;
+    divisi: {
+        name: string;
+    } | string;
 }
 
 interface VoteProps {
@@ -50,7 +52,9 @@ export default function Vote({ isOpen, onClose, candidate }: VoteProps) {
                     {/* Division */}
                     <div className="flex flex-col sm:block">
                         <h3 className="text-xs sm:text-base font-semibold text-blue-600 mb-0.5 sm:mb-1">Divisi</h3>
-                        <p className="text-sm sm:text-base text-gray-700 font-medium ">{candidate.divisi}</p>
+                        <p className="text-sm sm:text-base text-gray-700 font-medium ">
+                            {typeof candidate.divisi === 'string' ? candidate.divisi : candidate.divisi?.name}
+                        </p>
                     </div>
 
                     {/* Order */}
@@ -66,17 +70,9 @@ export default function Vote({ isOpen, onClose, candidate }: VoteProps) {
                 {/* Visi */}
                 <div>
                     <h3 className="text-sm sm:text-base font-semibold text-blue-600 mb-2">Visi</h3>
-                    {candidate.visi.length > 1 ? (
-                        <ul className="list-disc list-inside text-gray-700 flex flex-col gap-1 sm:gap-2">
-                            {candidate.visi.map((item, index) => (
-                                <li key={index} className="text-sm sm:text-base leading-relaxed">{item}</li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                            {candidate.visi[0]}
-                        </p>
-                    )}
+                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                        {candidate.visi}
+                    </p>
                 </div>
 
                 {/* Misi */}
