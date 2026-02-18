@@ -15,24 +15,21 @@ class CandidatesTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->columns([
-                TextColumn::make('name')
-                    ->searchable(),
+            ->emptyStateHeading('Tidak ada data')
+            ->emptyStateDescription('Tambahkan data kandidat')
+            ->columns([ 
                 TextColumn::make('order')
-                    ->numeric()
-                    ->sortable(),
-                ImageColumn::make('image'),
+                    ->label('No')
+                    ->numeric(),
+                ImageColumn::make('image')
+                    ->label('Foto')
+                    ->height(100)
+                    ->disk('public'),
+                TextColumn::make('name')
+                    ->label('Nama Kandidat')
+                    ->searchable(),
                 TextColumn::make('divisi.name')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Divisi'),
             ])
             ->filters([
                 //

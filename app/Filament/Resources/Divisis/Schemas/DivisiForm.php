@@ -12,8 +12,12 @@ class DivisiForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('Nama Divisi')
+                    ->placeholder('Contoh: Teknik Informatika')
                     ->required(),
                 TextInput::make('code')
+                    ->label('Kode Divisi')
+                    ->placeholder('Contoh: S1')
                     ->required(),
             ]);
     }

@@ -21,7 +21,7 @@ class AppSettingResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-clock';
     protected static string|UnitEnum|null $navigationGroup = 'Pengaturan';
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
     
     protected static ?string $navigationLabel = 'Jadwal Pemilihan'; 
     protected static ?string $modelLabel = 'Jadwal Pemilihan'; 
@@ -49,8 +49,7 @@ class AppSettingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListAppSettings::route('/'),
-            'create' => CreateAppSetting::route('/create'),
+            'index' => ListAppSettings::route('/'), 
             'edit' => EditAppSetting::route('/{record}/edit'),
         ];
     }

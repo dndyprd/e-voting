@@ -11,8 +11,12 @@ class AppSettingForm
     {
         return $schema
             ->components([
-                DateTimePicker::make('start_date'),
-                DateTimePicker::make('end_date'),
+                DateTimePicker::make('start_date')
+                    ->label('Tanggal Mulai')
+                    ->required(),
+                DateTimePicker::make('end_date')
+                    ->label('Tanggal Selesai')
+                    ->required(),
             ]);
     }
 }

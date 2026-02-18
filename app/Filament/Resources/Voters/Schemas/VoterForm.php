@@ -5,7 +5,7 @@ namespace App\Filament\Resources\Voters\Schemas;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Schema;
+use Filament\Schemas\Schema; 
 
 class VoterForm
 {
@@ -14,16 +14,16 @@ class VoterForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
-                TextInput::make('email')
-                    ->label('Email address')
-                    ->email(),
-                TextInput::make('auth_code')
+                    ->label('Nama Pemilih')
+                    ->placeholder('Contoh: Dandy Pradnyana')
+                    ->columnSpanFull()
                     ->required(),
                 Select::make('divisi_id')
                     ->relationship('divisi', 'name')
-                    ->required(),
-                Toggle::make('is_voted')
+                    ->label('Divisi') 
+                    ->placeholder('Pilih Divisi')
+                    ->native(false)
+                    ->columnSpanFull()
                     ->required(),
             ]);
     }

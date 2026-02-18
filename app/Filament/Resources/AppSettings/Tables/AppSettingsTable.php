@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Carbon\Carbon;
 
 class AppSettingsTable
 {
@@ -14,20 +15,14 @@ class AppSettingsTable
     {
         return $table
             ->columns([
+                TextColumn::make('name')
+                    ->label('Nama'),
                 TextColumn::make('start_date')
-                    ->dateTime()
-                    ->sortable(),
+                    ->label('Tanggal Mulai')
+                    ->formatStateUsing(fn ($state) => Carbon::parse($state)->format('d M Y H:i')),
                 TextColumn::make('end_date')
-                    ->dateTime()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Tanggal Selesai')
+                    ->formatStateUsing(fn ($state) => Carbon::parse($state)->format('d M Y H:i')),
             ])
             ->filters([
                 //

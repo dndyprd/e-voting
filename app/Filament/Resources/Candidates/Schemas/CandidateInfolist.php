@@ -12,16 +12,7 @@ class CandidateInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
-                TextEntry::make('order')
-                    ->numeric(),
-                ImageEntry::make('image'),
-                TextEntry::make('divisi.name')
-                    ->numeric(),
-                TextEntry::make('created_at')
-                    ->dateTime(),
-                TextEntry::make('updated_at')
-                    ->dateTime(),
+                // 
             ]);
     }
 }
