@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\AppSetting;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -43,6 +44,13 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user('web') 
                     ? $request->user('web')
                     : ($request->user('voter') ? $request->user('voter')->load('divisi') : null),
+            ],
+            'app_settings' => AppSetting::first(),
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+                'warning' => $request->session()->get('warning'),
+                'info' => $request->session()->get('info'),
             ],
         ];
     }

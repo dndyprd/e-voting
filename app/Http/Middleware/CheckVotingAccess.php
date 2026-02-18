@@ -26,7 +26,11 @@ class CheckVotingAccess
             
             // If voting hasn't started yet
             if ($now < $settings->start_date) {
-                return Inertia::render('waiting');
+                return redirect()->route('home')->with('warning', 'Sesi voting belum dimulai! Silakan tunggu hingga waktu yang ditentukan.');
+            }
+
+            if ($now > $settings->end_date) {
+                return redirect()->route('home')->with('warning', 'Sesi voting telah berakhir! Terima kasih atas partisipasi Anda.');
             }
         }
 

@@ -8,7 +8,11 @@ import Register from '@/components/auth/register';
 import Login from '@/components/auth/login';
 
 export default function Welcome() {
-    const { props } = usePage<{ name: string; organization_name: string; auth: Auth }>();
+    const { props } = usePage<{
+        name: string;
+        organization_name: string;
+        auth: Auth;
+    }>();
     const { auth } = props;
 
     const appName = props.name || 'APP NAME';
