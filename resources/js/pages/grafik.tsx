@@ -8,7 +8,12 @@ import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
-export default function Grafik() {
+interface CandidateVote {
+    name: string;
+    votes_count: number;
+}
+
+export default function Grafik({ candidates }: { candidates: CandidateVote[] }) {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -32,11 +37,11 @@ export default function Grafik() {
     }, []);
 
     const handleRefresh = () => {
-        router.reload({ only: ['candidate'] });
+        router.reload({ only: ['candidates'] });
     };
 
-    const labels = ['Candidate 1', 'Candidate 2', 'Candidate 3'];
-    const values = [3, 2, 4];
+    const labels = candidates.map(c => c.name);
+    const values = candidates.map(c => c.votes_count);
 
     const colorPalette = [
         '#0747d0', // Blue 600
@@ -123,7 +128,7 @@ export default function Grafik() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
                         {/* Chart */}
                         <div className="md:col-span-2 bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 flex items-center justify-center min-h-[200px] md:min-h-[400px]">
-                            <div className="w-full h-[200px] md:h-[400px] relative">
+                            <div className="w-full h-[400px] relative">
                                 <Doughnut data={data} options={options} />
                             </div>
                         </div>

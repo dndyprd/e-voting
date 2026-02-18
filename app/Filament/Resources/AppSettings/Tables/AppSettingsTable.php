@@ -31,9 +31,7 @@ class AppSettingsTable
                 EditAction::make(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                //
             ]);
     }
 }

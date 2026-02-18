@@ -43,7 +43,7 @@ export default function Voting({ candidates }: { candidates: Candidate[] }) {
                 candidate={selectedCandidate}
             />
             <Layout>
-                <div className="center flex-col gap-4 w-full max-w-6xl md:pt-12">
+                <div className="center flex-col gap-4 w-full max-w-6xl pt-12">
                     {/* Header */}
                     <div className="center bg-white text-blue-950 px-4 py-2 md:px-10 gap-2 md:gap-4 w-full rounded-2xl">
                         <Player

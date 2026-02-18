@@ -19,6 +19,16 @@ class VotingController extends Controller
 
     public function grafik()
     {
-        return Inertia::render('grafik');
+        $candidates = Candidate::withCount('votes')->orderBy('order')->get()
+            ->map(function ($candidate) {
+                return [
+                    'name' => $candidate->name,
+                    'votes_count' => $candidate->votes_count + 1,
+                ];
+            });
+
+        return Inertia::render('grafik', [
+            'candidates' => $candidates
+        ]);
     }
 }
