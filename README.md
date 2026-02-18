@@ -4,6 +4,9 @@ Sistem E-Voting berbasis website yang dirancang untuk mempermudah proses pemilih
 
 ---
 
+## 📸 Tampilan
+![](./preview.jpeg)
+
 ## 🚀 Tech Stack
 
 ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
@@ -45,26 +48,36 @@ cp .env.example .env
 Lalu atur koneksi database dan nama organisasi Anda di dalam file `.env`:
 ```env
 APP_NAME="Nama Aplikasi"
-ORGANIZATION="Nama Organisasi"
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=e-voting
 DB_USERNAME=root
 DB_PASSWORD=password
+ORGANIZATION="Nama Organisasi"
 ```
 
-### 6. Generate App Key
+### 6. Konfigurasi Pengiriman Email (Resend)
+Untuk mengaktifkan fitur pengiriman `auth_code` via email, konfigurasikan bagian ini di `.env`:
+```env
+MAIL_MAILER=resend
+RESEND_API_KEY=re_your_api_key
+MAIL_FROM_ADDRESS=onboarding@resend.dev
+MAIL_FROM_NAME="${APP_NAME}"
+```
+> 💡 **Penting:** Dapatkan API Key Anda di [Resend Dashboard](https://resend.com). Jika menggunakan akun gratis, gunakan `onboarding@resend.dev` sebagai `MAIL_FROM_ADDRESS` kecuali Anda sudah melakukan verifikasi domain.
+
+### 7. Generate App Key
 ```bash
 php artisan key:generate
 ```
 
-### 7. Migrasi Database & Seeding (Opsional)
+### 8. Migrasi Database & Seeding (Opsional)
 ```bash
 php artisan migrate
 ```
 
-### 8. Menjalankan Aplikasi
+### 9. Menjalankan Aplikasi
 Buka dua terminal dan jalankan perintah berikut:
 
 ```bash
@@ -75,16 +88,7 @@ Aplikasi dapat diakses di: `http://localhost:8000`
 
 ---
 
-## 📸 Tampilan
+## 📝 Kontribusi & Lisensi
+Kontribusi selalu terbuka! Silakan lakukan **Fork** dan kirimkan **Pull Request** jika Anda ingin mengembangkan fitur baru. Project ini di bawah lisensi [MIT](LICENSE).
 
-
----
-
-## 📝 Kontribusi
-Kontribusi selalu terbuka! Silakan lakukan **Fork** dan kirimkan **Pull Request** jika Anda ingin mengembangkan fitur baru.
-
-## 📄 Lisensi
-Project ini di bawah lisensi [MIT](LICENSE).
-
----
 *Created by Dandy Pradnyana - 2026*
