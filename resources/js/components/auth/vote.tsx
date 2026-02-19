@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import Modal from "@/components/ui/modal";
+import { useForm, usePage } from "@inertiajs/react";
+import { Auth } from "@/types/auth";
 
 interface Candidate {
+    id: number;
     name: string;
     order: number;
     image: string;
@@ -18,7 +22,31 @@ interface VoteProps {
 }
 
 export default function Vote({ isOpen, onClose, candidate }: VoteProps) {
+    const { auth } = usePage<{ auth: Auth }>().props;
+    const isVoted = auth.user?.is_voted;
+
+    const { post, processing, setData, data } = useForm({
+        candidate_id: candidate?.id,
+    });
+
+    useEffect(() => {
+        if (candidate?.id) {
+            setData('candidate_id', candidate.id);
+        }
+    }, [candidate]);
+
     if (!candidate) return null;
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (isVoted || processing || !data.candidate_id) return;
+
+        post('/vote', {
+            onSuccess: () => {
+                onClose();
+            },
+        });
+    };
 
     return (
         <Modal isOpen={isOpen} onClose={onClose} maxW="max-w-3xl md:max-w-5xl">
@@ -93,12 +121,30 @@ export default function Vote({ isOpen, onClose, candidate }: VoteProps) {
             </div>
 
             {/* Vote Button */}
-            <div className="mt-6 sm:mt-10">
-                <button className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl active:scale-[0.98] flex items-center justify-center gap-2">
-                    <i className="fa-solid fa-thumbs-up"></i>
-                    <span>Vote Sekarang!</span>
+            <form onSubmit={handleSubmit} className="mt-6 sm:mt-10">
+                <button
+                    type="submit"
+                    disabled={isVoted || processing}
+                    className={`w-full font-bold py-4 rounded-xl transition-all duration-300 shadow-lg flex items-center justify-center gap-2 
+                        ${isVoted
+                            ? 'bg-gray-400 cursor-not-allowed text-gray-100 shadow-none'
+                            : 'bg-blue-600 hover:bg-blue-700 text-white cursor-pointer hover:shadow-xl active:scale-[0.98]'
+                        } ${processing ? 'opacity-70 cursor-wait' : ''}`}
+                >
+                    <i className={`fa-solid ${isVoted ? 'fa-check' : (processing ? 'fa-spinner fa-spin' : 'fa-thumbs-up')}`}></i>
+                    <span>
+                        {isVoted
+                            ? 'Satu Suara Anda Sudah Direkam'
+                            : (processing ? 'Sedang Memproses...' : 'Vote Sekarang!')
+                        }
+                    </span>
                 </button>
-            </div>
+                {isVoted && (
+                    <p className="text-center text-gray-500 text-xs mt-3 italic">
+                        *Anda hanya diperbolehkan memberikan suara sebanyak satu kali.
+                    </p>
+                )}
+            </form>
         </Modal>
     );
 }

@@ -12,6 +12,7 @@ Route::get('/', function () {
 
 Route::middleware([CheckVotingAccess::class])->group(function () {
     Route::get('/voting', [VotingController::class, 'index'])->name('voting');
+    Route::post('/vote', [VotingController::class, 'vote'])->name('vote');
     Route::get('/grafik', [VotingController::class, 'grafik'])->name('grafik');
 });
 

@@ -26,11 +26,15 @@ class CheckVotingAccess
             
             // If voting hasn't started yet
             if ($now < $settings->start_date) {
-                return redirect()->route('home')->with('warning', 'Sesi voting belum dimulai! Silakan tunggu hingga waktu yang ditentukan.');
+                return redirect()->route('home')
+                    ->with('warning', 'Sesi voting belum dimulai! Silakan tunggu hingga waktu yang ditentukan.')
+                    ->with('open_timer', true);
             }
 
             if ($now > $settings->end_date) {
-                return redirect()->route('home')->with('warning', 'Sesi voting telah berakhir! Terima kasih atas partisipasi Anda.');
+                return redirect()->route('home')
+                    ->with('warning', 'Sesi voting telah berakhir! Terima kasih atas partisipasi Anda.')
+                    ->with('open_timer', true);
             }
         }
 

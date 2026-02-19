@@ -12,6 +12,7 @@ class Vote extends Model
     protected $fillable = [
         'voter_id',
         'candidate_id',
+        'voted_at',
     ];
 
     public function voter(): BelongsTo

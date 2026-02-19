@@ -26,6 +26,8 @@ class AuthController extends Controller
         return back()->withErrors([
             'auth_code' => 'Kode akses tidak valid.',
         ]);
+
+        return redirect()->route('home')->with('success', 'Anda berhasil login.');
     }
 
     public function register(Request $request)

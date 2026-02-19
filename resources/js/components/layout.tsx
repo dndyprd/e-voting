@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import Squares from '@/components/Squares';
-import Navbar from '@/components/navbar';
 import { usePage } from '@inertiajs/react';
 import { Timer } from '@/components/timer';
+import { Auth } from '@/types/auth';
 import Notification from '@/components/ui/notification';
+import Squares from '@/components/Squares';
+import Navbar from '@/components/navbar';
 
 interface AppSettings {
     start_date: string | null;
@@ -15,11 +16,19 @@ interface FlashProps {
     error: string | null;
     warning: string | null;
     info: string | null;
+    open_timer: boolean | null;
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-    const { app_settings, flash } = usePage<{ app_settings: AppSettings; flash: FlashProps }>().props;
-    const [isTimerVisible, setIsTimerVisible] = useState(true);
+    const { app_settings, flash, auth } = usePage<{ app_settings: AppSettings; flash: FlashProps; auth: Auth }>().props;
+    const [isTimerVisible, setIsTimerVisible] = useState(false);
+
+    useEffect(() => {
+        if (flash.open_timer && auth.user) {
+            setIsTimerVisible(true);
+        }
+    }, [flash.open_timer, auth.user]);
+
     const [notification, setNotification] = useState<{ isOpen: boolean; title: string; message: string; type: 'success' | 'error' | 'warning' | 'info' }>({
         isOpen: false,
         title: '',

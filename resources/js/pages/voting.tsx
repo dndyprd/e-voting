@@ -13,6 +13,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 interface Candidate {
+    id: number;
     name: string;
     order: number;
     image: string;
