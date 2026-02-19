@@ -74,7 +74,7 @@ php artisan key:generate
 
 ### 8. Migrasi Database & Seeding (Opsional)
 ```bash
-php artisan migrate
+php artisan migrate --seed
 ```
 
 ### 9. Menjalankan Aplikasi
@@ -85,6 +85,12 @@ composer run dev
 ```
 
 Aplikasi dapat diakses di: `http://localhost:8000`
+
+### 🔐 Akses Dashboard Admin
+Untuk mengakses halaman manajemen (Admin & Panitia), silakan buka:
+- **Path:** `http://localhost:8000/dashboard`
+- **Akun Admin Default:** `admin@admin.com`
+- **Password Default:** `12345678` (Berlaku untuk semua akun hasil seeding)
 
 ---
 

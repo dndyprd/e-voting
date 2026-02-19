@@ -20,7 +20,7 @@ class DivisiResource extends Resource
     protected static ?string $model = Divisi::class;
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
-    protected static string|UnitEnum|null $navigationGroup = 'Pengaturan';
+    protected static string|UnitEnum|null $navigationGroup = 'Manajemen Data';
     protected static ?int $navigationSort = 2;
     
     protected static ?string $navigationLabel = 'Data Divisi'; 

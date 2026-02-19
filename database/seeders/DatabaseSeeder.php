@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             DivisiSeeder::class,
             CandidateSeeder::class,
             VoterSeeder::class,
+            PanitiaSeeder::class,
         ]);
     }
 }
