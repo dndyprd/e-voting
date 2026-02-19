@@ -16,7 +16,6 @@ class VoterSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             Voter::create([
                 'name' => Factory::create()->name(),
-                'email' => Factory::create()->email(),
                 'divisi_id' => rand(1, 3),
             ]);
         }

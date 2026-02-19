@@ -2,8 +2,6 @@
 
 Sistem E-Voting berbasis website yang dirancang untuk mempermudah proses pemilihan ketua organisasi secara digital, transparan, dan efisien. Project ini dibangun menggunakan teknologi modern untuk memastikan performa dan keamanan yang optimal.
 
----
-
 ## 📸 Tampilan
 ![](./preview.jpeg)
 
@@ -12,7 +10,7 @@ Sistem E-Voting berbasis website yang dirancang untuk mempermudah proses pemilih
 ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 ![Filament](https://img.shields.io/badge/Filament-FFA116?style=for-the-badge&logo=laravel&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
 ---

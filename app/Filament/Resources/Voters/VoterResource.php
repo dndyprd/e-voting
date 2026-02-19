@@ -14,6 +14,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class VoterResource extends Resource
 {
@@ -37,6 +39,26 @@ class VoterResource extends Resource
     public static function table(Table $table): Table
     {
         return VotersTable::configure($table);
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()->role === 'admin';
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return Auth::user()->role === 'admin';
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return Auth::user()->role === 'admin';
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return Auth::user()->role === 'admin';
     }
 
     public static function getRelations(): array

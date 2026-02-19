@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class DivisiResource extends Resource
 {
@@ -37,6 +38,16 @@ class DivisiResource extends Resource
     public static function table(Table $table): Table
     {
         return DivisisTable::configure($table);
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()->role === 'admin';
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()->role === 'admin';
     }
 
     public static function getRelations(): array

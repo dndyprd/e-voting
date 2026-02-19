@@ -39,11 +39,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         }
     }, [flash]);
 
-    const now = new Date().getTime();
-    const start = app_settings?.start_date ? new Date(app_settings.start_date).getTime() : 0;
-    const end = app_settings?.end_date ? new Date(app_settings.end_date).getTime() : 0;
-    const status = now < start ? 'waiting' : (now < end ? 'running' : 'ended');
-
     return (
         <>
             <Navbar />

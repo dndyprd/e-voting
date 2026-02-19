@@ -15,6 +15,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class PanitiaResource extends Resource
 {
@@ -42,6 +43,16 @@ class PanitiaResource extends Resource
     public static function table(Table $table): Table
     {
         return PanitiasTable::configure($table);
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()->role === 'admin';
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()->role === 'admin';
     }
 
     public static function getRelations(): array
