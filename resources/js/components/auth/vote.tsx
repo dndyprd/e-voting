@@ -22,7 +22,8 @@ interface VoteProps {
 }
 
 export default function Vote({ isOpen, onClose, candidate }: VoteProps) {
-    const { auth } = usePage<{ auth: Auth }>().props;
+    const { auth: rawAuth } = usePage<{ auth: Auth }>().props;
+    const auth = rawAuth ?? { user: null };
     const isVoted = auth.user?.is_voted;
 
     const { post, processing, setData, data } = useForm({
@@ -79,9 +80,11 @@ export default function Vote({ isOpen, onClose, candidate }: VoteProps) {
 
                     {/* Division */}
                     <div className="flex flex-col sm:block">
-                        <h3 className="text-xs sm:text-base font-semibold text-blue-600 mb-0.5 sm:mb-1">Divisi</h3>
+                        <h3 className="text-xs sm:text-base font-semibold text-blue-600 mb-0.5 sm:mb-1">Program Studi</h3>
                         <p className="text-sm sm:text-base text-gray-700 font-medium ">
-                            {typeof candidate.divisi === 'string' ? candidate.divisi : candidate.divisi?.name}
+                            {typeof candidate.divisi === 'object' && candidate.divisi !== null && 'name' in candidate.divisi
+                                ? (candidate.divisi as { name: string }).name
+                                : (typeof candidate.divisi === 'string' ? candidate.divisi : 'N/A')}
                         </p>
                     </div>
 
@@ -106,16 +109,24 @@ export default function Vote({ isOpen, onClose, candidate }: VoteProps) {
                 {/* Misi */}
                 <div>
                     <h3 className="text-sm sm:text-base font-semibold text-blue-600 mb-2">Misi</h3>
-                    {candidate.misi.length > 1 ? (
-                        <ul className="list-disc list-inside text-gray-700 flex flex-col gap-1 sm:gap-2">
-                            {candidate.misi.map((item, index) => (
-                                <li key={index} className="text-sm sm:text-base leading-relaxed">{item}</li>
-                            ))}
-                        </ul>
+                    {Array.isArray(candidate.misi) && candidate.misi.length > 0 ? (
+                        candidate.misi.length > 1 ? (
+                            <ul className="list-disc list-inside text-gray-700 flex flex-col gap-1 sm:gap-2">
+                                {candidate.misi.map((item: any, index: number) => (
+                                    <li key={index} className="text-sm sm:text-base leading-relaxed">
+                                        {typeof item === 'object' && item !== null ? (item.item || JSON.stringify(item)) : item}
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                                {typeof candidate.misi[0] === 'object' && candidate.misi[0] !== null
+                                    ? ((candidate.misi[0] as any).item || JSON.stringify(candidate.misi[0]))
+                                    : candidate.misi[0]}
+                            </p>
+                        )
                     ) : (
-                        <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                            {candidate.misi[0]}
-                        </p>
+                        <p className="text-sm sm:text-base text-gray-400 italic">Misi belum ditambahkan.</p>
                     )}
                 </div>
             </div>

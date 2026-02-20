@@ -15,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind('path.public', function () {
+            return base_path();
+        }); 
     }
 
     /**
@@ -38,12 +40,10 @@ class AppServiceProvider extends ServiceProvider
         );
 
         Password::defaults(fn (): ?Password => app()->isProduction()
-            ? Password::min(12)
-                ->mixedCase()
+            ? Password::min(8) 
                 ->letters()
                 ->numbers()
                 ->symbols()
-                ->uncompromised()
             : null
         );
     }

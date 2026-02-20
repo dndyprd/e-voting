@@ -36,23 +36,46 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        return [
-            ...parent::share($request),
-            'name' => config('app.name'),
-            'organization_name' => env('ORGANIZATION'),
-            'auth' => [
-                'user' => $request->user('web') 
-                    ? $request->user('web')
-                    : ($request->user('voter') ? $request->user('voter')->load('divisi') : null),
-            ],
-            'app_settings' => AppSetting::first(),
-            'flash' => [
+        try {
+            $appSettings = AppSetting::first();
+        } catch (\Exception $e) {
+            $appSettings = null;
+        }
+
+        try {
+            $authUser = $request->user('web') 
+                ? $request->user('web')
+                : ($request->user('voter') ? $request->user('voter')->load('divisi') : null);
+        } catch (\Exception $e) {
+            $authUser = null;
+        }
+
+        try {
+            $flash = [
                 'success' => $request->session()->get('success'),
                 'error' => $request->session()->get('error'),
                 'warning' => $request->session()->get('warning'),
                 'info' => $request->session()->get('info'),
                 'open_timer' => $request->session()->get('open_timer'),
+            ];
+        } catch (\Exception $e) {
+            $flash = [
+                'success' => null,
+                'error' => null,
+                'warning' => null,
+                'info' => null,
+                'open_timer' => null,
+            ];
+        }
+
+        return array_merge(parent::share($request), [
+            'name' => config('app.name'),
+            'organization_name' => env('ORGANIZATION'),
+            'auth' => [
+                'user' => $authUser,
             ],
-        ];
+            'app_settings' => $appSettings,
+            'flash' => $flash,
+        ]);
     }
 }

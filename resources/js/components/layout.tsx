@@ -20,14 +20,17 @@ interface FlashProps {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-    const { app_settings, flash, auth } = usePage<{ app_settings: AppSettings; flash: FlashProps; auth: Auth }>().props;
+    const rawProps = usePage<{ app_settings: AppSettings; flash: FlashProps; auth: Auth }>().props;
+    const auth = rawProps.auth ?? { user: null };
+    const flash: FlashProps = rawProps.flash ?? { success: null, error: null, warning: null, info: null, open_timer: null };
+    const app_settings = rawProps.app_settings ?? null;
     const [isTimerVisible, setIsTimerVisible] = useState(false);
 
     useEffect(() => {
-        if (flash.open_timer && auth.user) {
+        if (flash?.open_timer && auth?.user) {
             setIsTimerVisible(true);
         }
-    }, [flash.open_timer, auth.user]);
+    }, [flash?.open_timer, auth?.user]);
 
     const [notification, setNotification] = useState<{ isOpen: boolean; title: string; message: string; type: 'success' | 'error' | 'warning' | 'info' }>({
         isOpen: false,
@@ -37,13 +40,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     });
 
     useEffect(() => {
-        if (flash.success) {
+        if (flash?.success) {
             setNotification({ isOpen: true, title: 'Berhasil', message: flash.success, type: 'success' });
-        } else if (flash.error) {
+        } else if (flash?.error) {
             setNotification({ isOpen: true, title: 'Kesalahan', message: flash.error, type: 'error' });
-        } else if (flash.warning) {
+        } else if (flash?.warning) {
             setNotification({ isOpen: true, title: 'Perhatian', message: flash.warning, type: 'warning' });
-        } else if (flash.info) {
+        } else if (flash?.info) {
             setNotification({ isOpen: true, title: 'Informasi', message: flash.info, type: 'info' });
         }
     }, [flash]);

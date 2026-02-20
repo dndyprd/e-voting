@@ -13,7 +13,7 @@ export default function Welcome() {
         organization_name: string;
         auth: Auth;
     }>();
-    const { auth } = props;
+    const auth = props.auth ?? { user: null };
 
     const appName = props.name || 'APP NAME';
     const organization = props.organization_name || 'ORGANIZATION';
@@ -43,7 +43,7 @@ export default function Welcome() {
                 }}
             />
             <Layout>
-                <div className="pt-20 md:pt-14 center flex-col md:flex-row gap-12 md:gap-20">
+                <div className="pt-20 md:pt-2 center flex-col md:flex-row gap-12 md:gap-20">
                     {/* LEFT: TEXT SECTION */}
                     <div className="flex flex-col items-center md:items-start justify-center max-w-2xl text-white">
                         {/* HEADER TITLE */}
@@ -74,7 +74,7 @@ export default function Welcome() {
                             <a href="/voting" className="btn-home bg-white text-blue-800 shadow-lg hover:bg-blue-50 flex items-center gap-2">
                                 <i className="fa-solid fa-inbox"></i> Voting Sekarang
                             </a>
-                            {!auth.user &&
+                            {!auth?.user &&
                                 <button
                                     onClick={() => setIsLoginOpen(true)}
                                     className="cursor-pointer btn-home bg-white/5 backdrop-blur-sm border border-white/20 text-white hover:bg-white/10"

@@ -8,7 +8,7 @@ import Login from '@/components/auth/login';
 
 export default function Profile() {
     const { props } = usePage<{ auth: Auth }>();
-    const { auth } = props;
+    const auth = props.auth ?? { user: null };
 
     const description = !auth.user
         ? "Selamat datang di halaman profil. Login terlebih dahulu untuk melakukan voting"
